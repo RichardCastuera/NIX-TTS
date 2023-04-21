@@ -1,0 +1,58 @@
+#text-input {
+  position: relative;
+  height: 200px;
+  width: 100%;
+  border: 3px solid gray;
+  border-radius: 5px;
+  padding: 10px 10px 10px 10px;
+  font-size: 20px;
+  transition: font-size 0.2s ease-in-out;
+}
+
+.i-container {
+  position: relative;
+  height: 4rem;
+  width: 5rem;
+  margin-top: 0.2rem;
+  padding: 0.5px 0.2rem;
+  z-index: 1;
+}
+.i-container input {
+  position: absolute;
+  height: 50%;
+  width: 80%;
+  cursor: pointer;
+  z-index: 2;
+  opacity: 0;
+}
+.i-container .button-tile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 60%;
+  border: 3px solid gray;
+  border-radius: 8px;
+  transition: all 300ms ease;
+  row-gap: 4%;
+}
+.i-container iconify-icon{
+  color: none;
+  font-size: 1.5rem;
+}
+.i-container {
+  color: none;
+  font-size: 1.5rem;
+}
+#zout {
+  color: none;
+  font-size: 1.7rem;
+}
+.zoom-feature {
+  display: flex;
+  position: absolute;
+  bottom: 0px;
+  right: 5%;
+  top: 73%;
+}
+

@@ -1,0 +1,103 @@
+body{
+  background-color: rgb(16, 111, 169);
+  margin: 0;padding: 0;
+}
+
+.content {
+  background-color: white;
+  margin: 1% 5% 1% 5%;
+  padding: 0.5% 0.5% 0.2% 0.5%;
+  border-radius: 2%;
+  border: 5px solid rgb(7, 2, 111);
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+}
+
+#text-input {
+  position: relative;
+  height: 175px;
+  width: 100%;
+  border: 3px solid gray;
+  border-radius: 5px;
+  padding: 10px 10px 10px 10px;
+  font-size: 15px;
+  transition: font-size 0.2s ease-in-out;
+}
+
+.i-container {
+  position: relative;
+  height: 4rem;
+  width: 5rem;
+  margin-top: 0.1rem;
+  padding: 0.5px 0.2rem;
+  z-index: 1;
+}
+.i-container input {
+  position: absolute;
+  height: 50%;
+  width: 80%;
+  cursor: pointer;
+  z-index: 2;
+  opacity: 0;
+}
+.i-container .button-tile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 60%;
+  border: 3px solid gray;
+  border-radius: 8px;
+  transition: all 300ms ease;
+  row-gap: 4%;
+}
+.i-container iconify-icon{
+  color: none;
+  font-size: 1.5rem;
+}
+.i-container {
+  color: none;
+  font-size: 1.5rem;
+}
+#zout {
+  color: none;
+  font-size: 1.7rem;
+}
+.zoom-feature {
+  display: flex;
+  position: absolute;
+  bottom: 0px;
+  right: 5%;
+  top: 73%;
+}
+
+.image {
+  float: right;
+  margin-top: 10px;
+  margin-left: 60%;
+}
+
+.title {
+  margin-top: 10px;
+}
+
+img {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  border: 3px solid gray;
+}
+
+.contents {
+  border: 2px solid black;
+  border-radius: 5%;
+  margin:10%, 20%, 10%, 20%;
+}
+
+hr {
+  padding: 1px;
+  background-color: gray;
+}
+
+/* .col-xs-4, .col-xs-8 {
+  border: 2px solid black;
+} */

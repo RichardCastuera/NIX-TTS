@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIX-ITAC</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css'>
+    -<link rel="stylesheet" type="text/css" href="style.css">-
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="content"> 
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-1"></div>
+      <div class="col-xs-2">
+        <div class="image">
+          <img src="static/logo.jpg">
+        </div>
+      </div>
+      <div class="col-xs-8 text-center">
+        <div class="title">
+          <h1>NIX-Integrated Text & Audio Converter</h1>
+          <p>Convert text to speech or speech to text with NIX!</p>
+        </div>
+      </div>
+      <div class="col-xs-1"></div>
+    </div>
+        <hr>
+  </div>
+
+  <div class="container">
+    <h2>TEXT-TO-SPEECH</h2>
+    <p>Uses Text as an Input and Outputs it to Audio</p>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <textarea name="text" id="text-input" placeholder="Type anything..."></textarea>
+        </div>
+        <div class="zoom-feature">
+          <div id="zoomin" class="i-container">
+            <input type="button" name="button" onClick="zoomIn()">
+            <div class="button-tile">
+              <iconify-icon icon="bx:zoom-in"></iconify-icon>
+            </div>
+          </div>
+          <div id="zoomout" class="i-container">
+            <input type="button" name="button" onClick="zoomOut()">
+            <div class="button-tile">
+              <iconify-icon id="zout" icon="material-symbols:zoom-out"></iconify-icon>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="container text-center">
+      <div class="col-xs-12">
+        <p id="instructions-tts">Press the <strong>Synthesize Button</strong> to start converting <strong>Text to Speech</strong></p>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-xs-12">
+        <button type="button" class="btn btn-primary btn-block " id="synthesize" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing Request" onclick="synthesize()" style="margin-top: 0.5%">Synthesize</button>
+      </div>
+    </div>
+    
+    <br>
+
+    <div class="row text-center">
+      <div class="col-xs-12">
+        <h5 class="output"><strong>OUTPUT</strong></h5>
+      </div>
+      <div>
+        <audio id="audio-player" controls>
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+  </div>
+</div>
+  <script>
+    // Loading Animation
+    $('.btn').on('click', function() {
+      var $this = $(this);
+      $this.button('loading');
+    });
+
+    // Synthesizing text
+    function synthesize() {
+      var instructionsTTS = $('#instructions-tts');
+      instructionsTTS.text('Please wait we are processing your request.');
+      const text = document.getElementById("text-input").value;
+      fetch("/call/NIX", {
+        method: "POST",
+        body: new URLSearchParams({ text }),
+      })
+        .then((response) => response.blob())
+        .then(blob => {
+          const audioPlayer = $('#audio-player')[0];
+          const url = URL.createObjectURL(blob);
+          audioPlayer.src = url;
+          audioPlayer.oncanplay = function() {
+            $('.btn').button('reset');
+            instructionsTTS.text('You may now play the synthesized text.');
+          };
+        })
+        .catch((error) => console.error(error));
+    }
+
+    // Zoom Features
+    var fontSize = 15;
+    function zoomIn() {
+        fontSize += 1;
+        document.getElementById("text-input").style.fontSize = fontSize + "px";
+    }
+    function zoomOut() {
+        fontSize -= 1;
+        document.getElementById("text-input").style.fontSize = fontSize + "px";
+    }
+  </script>
+
+  <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
+</body>
+</html>
